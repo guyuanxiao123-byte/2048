@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $ACK_DEPLOYMENT_NAME
+  labels:
+    app: $APP_NAME
+spec:
+  replicas: $REPLICAS
+  selector:
+    matchLabels:
+      app: $APP_NAME
+  template:
+    metadata:
+      labels:
+        app: $APP_NAME
+    spec:
+      containers:
+      - name: $CONTAINER_NAME
+        image: $INSTANCE_ID.$REGISTRY/$NAMESPACE/$IMAGE:$TAG
+        ports:
+        - containerPort: $CONTAINER_PORT
